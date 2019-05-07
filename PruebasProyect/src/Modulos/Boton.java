@@ -12,19 +12,29 @@ import java.awt.Color;
  *
  * @author pablo
  */
-public class Boton implements Modulo {
-
+public class Boton implements Modulo, Runnable {
+    //hilo
+    private Thread hilo = null;
+    //modulo var
     private boolean desarmado = false;
+    //data
     private Color color = null;
     private String texto = "";
+    private int valor = 0;
+    //interacciones
+    private int soluci = 0;
+    private static boolean pulsado = false;
+    private static int valorEnvio = 0;
 
-    public Boton() {
-
-    }
-
-    public Boton(Color color, String txt) {
+    public Boton(Color color, String txt, int valor) {
         this.color = color;
         this.texto = txt;
+        this.valor = valor;
+        if ( color.equals(Color.BLACK))
+        soluci = txt.length() + valor + 1;
+        else if ( color.equals(Color.BLUE))
+        soluci = txt.length() + valor + 2;
+        else soluci = txt.length() + valor + 3;
     }
 
     @Override
@@ -52,5 +62,46 @@ public class Boton implements Modulo {
     public void setTexto(String texto) {
         this.texto = texto;
     }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public static void setValorEnvio(int valor){
+        valorEnvio = valor;
+    }
+
+    public static void setPulsado(Boolean puls){
+        pulsado = puls;
+    }
+
+    @Override
+    public void run() {
+        Thread hiloActual = Thread.currentThread();
+        while (hiloActual == hilo) {
+            if(pulsado){
+                if(valorEnvio == soluci){
+                    setDesarmado(true);
+                } else {
+                    Contador.setStrikes();
+
+                }
+            }
+        }
+        
+    }
+
+    public void start() {
+        if (hilo == null) {
+            hilo = new Thread(this); // creo el hilo
+            hilo.start(); // lanzo hilo
+        }
+    }
+
+
 
 }

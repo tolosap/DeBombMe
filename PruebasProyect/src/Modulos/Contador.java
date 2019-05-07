@@ -17,19 +17,23 @@ import java.util.logging.Logger;
 public class Contador implements Runnable {
 
     private Thread hilo = null;
-    private long segundos; //en milesimas
-    private int strikes; //fallos cometidos al desactivar la bomba
+    private static long segundosC; //en milesimas
+    private static int strikes; //fallos cometidos al desactivar la bomba
 
     public Contador(long segundos) {
-        this.segundos = segundos;
+        segundosC = segundos;
     }
 
     public int getStrikes() {
         return strikes;
     }
 
-    public void setStrikes(int strikes) {
-        this.strikes = strikes;
+    public static void setStrikes() {
+        strikes++;
+    }
+
+    public static long getSegundos(){
+        return segundosC;
     }
 
     public void start() {
@@ -45,17 +49,17 @@ public class Contador implements Runnable {
         Thread hiloActual = Thread.currentThread();
         while (hiloActual == hilo) {
             if (strikes == 0) { // si no hay fallos, el contador funciona con normalidad
-                System.out.println(segundos);
-                segundos--;
+                System.out.println(segundosC);
+                segundosC--;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (strikes == 1) { //si hay un fallo, el contador una un 25% mas rapido
-                System.out.println(segundos);
-                segundos--;
+            if (strikes == 1) { //si hay un fallo, el contador ira un 25% mas rapido
+                System.out.println(segundosC);
+                segundosC--;
                 try {
                     Thread.sleep(750);
                 } catch (InterruptedException ex) {
@@ -63,8 +67,8 @@ public class Contador implements Runnable {
                 }
             }
             if (strikes == 2) { //si hay dos fallos, el contador ira el doble de rapido
-                System.out.println(segundos);
-                segundos--;
+                System.out.println(segundosC);
+                segundosC--;
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {

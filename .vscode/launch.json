@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Pruebas",
+            "request": "launch",
+            "mainClass": "Pruebas",
+            "projectName": "DeBombMe_8503e498"
+        }
+    ]
+}
