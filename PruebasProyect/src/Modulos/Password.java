@@ -11,14 +11,18 @@ import Interfaces.Modulo;
  *
  * @author pablo
  */
-public class Password implements Modulo {
+public class Password implements Modulo, Runnable {
+
+    private Thread hilo = null;
 
     private boolean desarmado = false;
     private String solucion = "";
 
-    public Password() {
-
-    }
+    private static String cadena1 = "abcdefghijklmnopqrstuvwxyz";
+    private static String cadena2 = "abcdefghijklmnopqrstuvwxyz";
+    private static String cadena3 = "abcdefghijklmnopqrstuvwxyz";
+    private static String cadena4 = "abcdefghijklmnopqrstuvwxyz";
+    private static String cadena5 = "abcdefghijklmnopqrstuvwxyz";
 
     public Password(String palabra) {
         this.solucion = palabra;
@@ -32,6 +36,21 @@ public class Password implements Modulo {
     @Override
     public void setDesarmado(boolean var) {
         this.desarmado = var;
+    }
+
+    public void start() {
+        if (hilo == null) {
+            hilo = new Thread(this); // creo el hilo
+            hilo.start(); // lanzo hilo
+        }
+    }
+
+    @Override
+    public void run() {
+        Thread hiloActual = Thread.currentThread();
+        while (hiloActual == hilo) {
+            
+        }
     }
 
 }
