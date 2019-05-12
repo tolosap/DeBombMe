@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/debombme</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <mapping resource="pojos/Usuario.hbm.xml"/>
+    <mapping resource="pojos/ModPassword.hbm.xml"/>
+    <mapping resource="pojos/ModSimbolos.hbm.xml"/>
+    <mapping resource="pojos/ModBoton.hbm.xml"/>
+    <mapping resource="pojos/ModTemporizador.hbm.xml"/>
+    <mapping resource="pojos/ModSimon.hbm.xml"/>
+    <mapping resource="pojos/ModContador.hbm.xml"/>
+    <mapping resource="pojos/Bomba.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

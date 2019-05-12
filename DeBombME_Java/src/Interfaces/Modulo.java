@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelos;
+package Interfaces;
 
 /**
  *
- * @author Pablo
+ * @author pablo
  */
-public class BombaModelo {
-    
+public interface Modulo {
+
+    public boolean getDesarmado();
+
+    public void setDesarmado(boolean var);
+
 }

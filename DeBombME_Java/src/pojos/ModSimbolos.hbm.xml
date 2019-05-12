@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-may-2019 16:07:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.ModSimbolos" table="mod_simbolos" catalog="debombme" optimistic-lock="version">
+        <id name="simboloId" type="int">
+            <column name="SimboloID" />
+            <generator class="assigned" />
+        </id>
+        <property name="simbolo" type="string">
+            <column name="Simbolo" not-null="true" />
+        </property>
+        <set name="bombas" table="bombas_simbolos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="simboloID" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojos.Bomba">
+                <column name="bombaID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

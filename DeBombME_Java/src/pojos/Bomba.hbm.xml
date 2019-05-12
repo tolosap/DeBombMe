@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-may-2019 16:07:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Bomba" table="bomba" catalog="debombme" optimistic-lock="version">
+        <id name="bombaId" type="java.lang.Integer">
+            <column name="BombaID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="modBoton" class="pojos.ModBoton" fetch="select">
+            <column name="BotonFK" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modContador" class="pojos.ModContador" fetch="select">
+            <column name="ContadorFK" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modPassword" class="pojos.ModPassword" fetch="select">
+            <column name="PasswordFK" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modSimon" class="pojos.ModSimon" fetch="select">
+            <column name="SimonFK" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modTemporizador" class="pojos.ModTemporizador" fetch="select">
+            <column name="TemporizadorFK" not-null="true" />
+        </many-to-one>
+        <property name="dificultad" type="int">
+            <column name="Dificultad" not-null="true" />
+        </property>
+        <set name="modSimboloses" table="bombas_simbolos" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="bombaID" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojos.ModSimbolos">
+                <column name="simboloID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

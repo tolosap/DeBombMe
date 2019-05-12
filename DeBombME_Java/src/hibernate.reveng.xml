@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="debombme"/>
+  <table-filter match-name="bombas_simbolos"/>
+  <table-filter match-name="mod_password"/>
+  <table-filter match-name="mod_simon"/>
+  <table-filter match-name="bomba"/>
+  <table-filter match-name="mod_simbolos"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="mod_temporizador"/>
+  <table-filter match-name="mod_boton"/>
+  <table-filter match-name="mod_contador"/>
+</hibernate-reverse-engineering>

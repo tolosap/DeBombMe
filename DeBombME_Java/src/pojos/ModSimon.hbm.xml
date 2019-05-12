@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-may-2019 16:07:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.ModSimon" table="mod_simon" catalog="debombme" optimistic-lock="version">
+        <id name="simonId" type="int">
+            <column name="SimonID" />
+            <generator class="assigned" />
+        </id>
+        <property name="secuencia" type="string">
+            <column name="Secuencia" not-null="true" />
+        </property>
+        <set name="bombas" table="bomba" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SimonFK" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Bomba" />
+        </set>
+    </class>
+</hibernate-mapping>

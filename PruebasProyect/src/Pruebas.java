@@ -33,18 +33,19 @@ public class Pruebas {
         return logged;
     }
 
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws SQLException {
+        Pruebas test = new Pruebas();
+        test.dameBomba(1);
     }
     
     public void dameBomba(int nivel) throws SQLException{
         Connection oCon = Singleton.getInstance();
-        String sql = "SELECT * FROM bomba WHERE id = ?";
+        String sql = "SELECT * FROM bomba WHERE BombaID = ?";
         PreparedStatement sent = oCon.prepareStatement(sql);
         sent.setInt(1, nivel);
         ResultSet rs = sent.executeQuery();
         while (rs.next()) {            
-            
+            System.out.println();
         }
     }
 

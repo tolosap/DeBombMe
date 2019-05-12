@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-dic-2018, 9:30:12
+    Author     : DAM 6J
+*/
+#grid{
+    -fx-background-color: #727272;
+}
+#loginpane{
+    -fx-border-color: white;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20;
+    -fx-background-color: linear-gradient(to bottom, lightgray, gray);
+
+}
+
+#welcome{
+    -fx-fill: linear-gradient(to bottom, orange, #c64f05);
+    -fx-font-size: 30px;
+    -fx-font-family: "monospace";
+    -fx-font-weight: bold;
+}
+
+#login{
+    -fx-background-color: linear-gradient(to bottom, orange, #c64f05);
+    -fx-border-radius: 13px;
+    -fx-background-radius: 13px; 
+}
