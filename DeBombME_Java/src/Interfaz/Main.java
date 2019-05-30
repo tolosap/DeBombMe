@@ -130,7 +130,7 @@ public class Main extends Application {
         border.setCenter(grid);
 
         Scene scene = new Scene(border, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
-        primaryStage.setScene(montaBomba(Utilities.dameBomba(1)));
+        primaryStage.setScene(scene);
         primaryStage.setTitle("DeBombMe");
         primaryStage.setResizable(false);
         scene.getStylesheets().add(Main.class.getResource("css/Stage1.css").toExternalForm());
@@ -225,10 +225,6 @@ public class Main extends Application {
 
         cont.start();
         tempo.start();
-        
-        File file = new File("/Helpers/Manual.txt");
-        HostServices hostServices = getHostServices();
-        hostServices.showDocument(file.getAbsolutePath());
 
         Scene scene = new Scene(grid, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
         return scene;

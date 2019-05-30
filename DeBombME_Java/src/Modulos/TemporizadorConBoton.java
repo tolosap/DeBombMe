@@ -33,7 +33,6 @@ public class TemporizadorConBoton implements Runnable {
     private Label lbl = new Label();
 
     private Thread hilo = null;
-    private static int strikes; //fallos cometidos al desactivar la bomba
 
     public TemporizadorConBoton(int value) {
         this.tiempo = value;
@@ -42,7 +41,6 @@ public class TemporizadorConBoton implements Runnable {
 
     public void start() {
         if (hilo == null) {
-            strikes = 0;
             hilo = new Thread(this); // creo el hilo
             hilo.start(); // lanzo hilo
         }
@@ -52,7 +50,6 @@ public class TemporizadorConBoton implements Runnable {
     public void run() {
         Thread hiloActual = Thread.currentThread();
         while (hiloActual == hilo) {
-
             Platform.runLater(() -> {
                 if (tiempo != 0) {
                     llenaContador();
@@ -62,7 +59,6 @@ public class TemporizadorConBoton implements Runnable {
                     Contexto.setFallos();
                     tiempo = tiempoTotal;
                 }
-
             });
             try {
                 Thread.sleep(1000);
