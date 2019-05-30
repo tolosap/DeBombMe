@@ -1,0 +1,33 @@
+.root{
+    -fx-font-family: 'Arial';
+    -fx-background-color: #dee1dd;
+}
+
+#passtxt, #usertxt {
+    -fx-border-radius: 20 20 20 20;
+    -fx-min-width: 29;
+    -fx-min-height: 29;
+}
+
+#grid{
+    -fx-background-image: url("/img/bg.png");
+    -fx-background-repeat: no-repeat;   
+    -fx-background-size: 550 400;
+}
+
+#btn{
+    -fx-background-color: #525252;
+    -fx-text-fill: white;
+    -fx-padding: 10,20,10,20;  
+}
+
+#btn:hover{
+    -fx-background-color: #658b6e;
+    -fx-text-fill: white;
+    -fx-padding: 10,20,10,20;  
+}
+
+#botonRegistro{
+    -fx-background-color: #525252;
+    -fx-text-fill: white;
+}

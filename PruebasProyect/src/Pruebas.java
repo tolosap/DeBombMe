@@ -2,7 +2,6 @@
 import Connector.Singleton;
 import java.awt.Color;
 
-import Modulos.Boton;
 import Modulos.Contador;
 /*import javafx.application.Application;
  import javafx.stage.Stage;*/

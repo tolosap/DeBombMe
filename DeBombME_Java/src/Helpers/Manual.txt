@@ -1,0 +1,27 @@
+///////////////////////////////
+//////##################///////
+//////#####DEBOMBME#####///////
+//////##################///////
+///////////////////////////////
+
+--------INSTRUCCIONES----------
+
+MÓDULO CONTADOR
+
+//////////////////////////////////
+////			0	0	0	 /////
+////						 /////
+////		04:37			 /////
+////						 /////
+///////////////////////////////////
+
+Este módulo no podrá ser desactivado a no ser que
+se consiga desactivar todos los demás módulos.
+
+Los tres circulos superiores se encenderán en caso
+de que falles al intentar resolver uno de ellos. Tienes
+tres intentos para no perder, buena suerte.
+
+En caso de fallar, el contador irá descendiendo más
+rápidamente.
+

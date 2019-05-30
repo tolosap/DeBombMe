@@ -12,7 +12,7 @@ import java.awt.Color;
  *
  * @author pablo
  */
-public class Boton implements Modulo, Runnable {
+public class CountdownButton implements Modulo, Runnable {
     //hilo
     private Thread hilo = null;
     //modulo var
@@ -26,7 +26,7 @@ public class Boton implements Modulo, Runnable {
     private static boolean pulsado = false;
     private static int valorEnvio = 0;
 
-    public Boton(Color color, String txt, int valor) {
+    public CountdownButton(Color color, String txt, int valor) {
         this.color = color;
         this.texto = txt;
         this.valor = valor;

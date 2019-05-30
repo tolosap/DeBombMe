@@ -6,6 +6,7 @@
 package Helpers;
 
 import Conexion.SessionFactoryUtil;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,11 +19,18 @@ import pojos.Usuario;
  * @author Pablo
  */
 public class Utilities {
-
-    public static void registro(String user, String password) {
+    
+    public static final int PRIMERA_ALTURA = 400;
+    public static final int PRIMERA_ANCHURA = 550;
+    
+    public static final int ALTURA_CELDA = 200;
+    public static final int ANCHURA_CELDA = 183;
+    
+    public static boolean registro(String user, String password) {
         SessionFactory oSes = null;
         Session sesion = null;
         Transaction tx = null;
+        boolean registrado = false;
         try {
             oSes = SessionFactoryUtil.getSessionFactory();
             sesion = oSes.openSession();
@@ -40,16 +48,19 @@ public class Utilities {
                 System.out.println("Usuario creado correctamente");
                 System.out.println("Pass sin sha: " + password);
                 System.out.println("Pass con sha: " + Sha256.getSHA(password));
+                registrado = true;
             } else {
+                JOptionPane.showMessageDialog(null, "Error, el nombre de usuario ya existe");
                 System.out.println("Error, el nombre de usuario ya existe");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             sesion.close();
-            oSes.close();
-            SessionFactoryUtil.destroy();
+            //oSes.close();
+            //SessionFactoryUtil.destroy();
         }
+        return registrado;
     }
 
     public static boolean login(String user, String password) {
@@ -67,6 +78,7 @@ public class Utilities {
             if (q.uniqueResult() == null) {
                 System.out.println("Error en el login");
             } else {
+                JOptionPane.showMessageDialog(null, "Bienvenido al sistema!");
                 System.out.println("Bienvenido al sistema!");
                 entra = true;
             }
@@ -74,8 +86,8 @@ public class Utilities {
             e.printStackTrace();
         } finally {
             sesion.close();
-            oSes.close();
-            SessionFactoryUtil.destroy();
+            //oSes.close();
+            //SessionFactoryUtil.destroy();
         }
         return entra;
     }
@@ -94,12 +106,17 @@ public class Utilities {
             System.out.println("Obtenida bomba: " + bombaBD.getBombaId());
             System.out.println("Contador: " + bombaBD.getModContador().getValor());
             System.out.println("Secuencia Simon: " + bombaBD.getModSimon().getSecuencia());
+            System.out.println(""+bombaBD.getDificultad());
+            System.out.println(""+bombaBD.getModBoton());
+            System.out.println(""+bombaBD.getModPassword());
+            System.out.println(""+bombaBD.getModSimboloses());
+            System.out.println(""+bombaBD.getModTemporizador());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             sesion.close();
-            oSes.close();
-            SessionFactoryUtil.destroy();
+            //oSes.close();
+            //SessionFactoryUtil.destroy();
         }
         return bombaBD;
     }

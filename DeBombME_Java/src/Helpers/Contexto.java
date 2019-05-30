@@ -26,8 +26,8 @@ public class Contexto {
         return fallos;
     }
 
-    public static void setFallos(int fallos) {
-        Contexto.fallos = fallos;
+    public static void setFallos() {
+        fallos++;
     }
     
 }
