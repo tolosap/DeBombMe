@@ -63,7 +63,7 @@ public class CountdownButton implements Modulo {
         this.desarmado = var;
     }
 
-    public Circle circle = new Circle(8);
+    public static Circle circle = new Circle(8);
 
     public BorderPane testScene() {
         BorderPane border = new BorderPane();
@@ -87,23 +87,23 @@ public class CountdownButton implements Modulo {
                 + "-fx-font-size: 15px;"
         );
         boton.setOnAction(e -> {
-            long valor = Contador.getSegundos();
-            if (String.valueOf(valor).length() == 1) {
-                if (valor == soluci) {
-                    setDesarmado(true);
-                    System.out.println("Modulo desarmado");
+            if (Contexto.getFallos() < 3) {
+                long valor = Contador.getSegundos();
+                if (String.valueOf(valor).length() == 1) {
+                    if (valor == soluci) {
+                        setDesarmado(true);
+                        circle.setFill(Color.GREEN);
+                    } else {
+                        Contexto.setFallos();
+                    }
                 } else {
-                    System.out.println("Has fallado");
-                    Contexto.setFallos();
-                }
-            } else {
-                long aux = Long.valueOf(String.valueOf(valor).substring(1));
-                if (aux == soluci) {
-                    setDesarmado(true);
-                    System.out.println("Modulo desarmado");
-                } else {
-                    System.out.println("Has fallado");
-                    Contexto.setFallos();
+                    long aux = Long.valueOf(String.valueOf(valor).substring(1));
+                    if (aux == soluci) {
+                        setDesarmado(true);
+                        circle.setFill(Color.GREEN);
+                    } else {
+                        Contexto.setFallos();
+                    }
                 }
             }
         });

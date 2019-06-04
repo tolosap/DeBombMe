@@ -50,20 +50,39 @@ public class TemporizadorConBoton implements Runnable {
     public void run() {
         Thread hiloActual = Thread.currentThread();
         while (hiloActual == hilo) {
-            Platform.runLater(() -> {
-                if (tiempo != 0) {
-                    llenaContador();
-                    tiempo--;
-                } else {
-                    llenaContador();
-                    Contexto.setFallos();
-                    tiempo = tiempoTotal;
+            if (Contexto.fallos < 2) {
+                Platform.runLater(() -> {
+                    if (tiempo != 0) {
+                        llenaContador();
+                        tiempo--;
+                    } else {
+                        llenaContador();
+                        Contexto.setFallos();
+                        tiempo = tiempoTotal;
+                    }
+                });
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (Contexto.fallos == 2) {
+                Platform.runLater(() -> {
+                    if (tiempo != 0) {
+                        llenaContador();
+                        tiempo--;
+                    } else {
+                        llenaContador();
+                        Contexto.setFallos();
+                        tiempo = tiempoTotal;
+                    }
+                });
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
@@ -99,13 +118,13 @@ public class TemporizadorConBoton implements Runnable {
             llenaContador();
         });
         btn.setMinSize(100, 35);
-        
+
         lbl.setFont(new Font("Arial", 36));
 
         grid.add(lbl, 0, 0);
         grid.add(btn, 0, 1);
 
-        circle.setFill(Color.BLACK);
+        circle.setFill(Color.GREEN);
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER_RIGHT);
         hb.setPadding(new Insets(0, 0, 5, 0));

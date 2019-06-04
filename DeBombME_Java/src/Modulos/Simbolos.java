@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,7 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 import pojos.ModSimbolos;
 
 /**
@@ -30,7 +28,6 @@ import pojos.ModSimbolos;
  */
 public class Simbolos implements Modulo {
 
-    private Thread hilo = null;
     private boolean desarmado = false;
     private List<ModSimbolos> listaSimbolos;
 
@@ -68,14 +65,11 @@ public class Simbolos implements Modulo {
     private String respuesta = "";
 
     public void comprueba() {
-        if (pulsaciones == 4) {
+        if (pulsaciones == 4 && Contexto.getFallos() < 3) {
             if (respuesta.equals(respuestaString)) {
-                //STOP THREAD
-                System.out.println("Solucion perfecta");
-                hilo = null;
                 setDesarmado(true);
+                circle.setFill(Color.GREEN);
             } else {
-                System.out.println("Has fallado, prueba otra vez");
                 Contexto.setFallos();
                 respuesta = "";
                 pulsaciones = 0;
@@ -83,7 +77,7 @@ public class Simbolos implements Modulo {
         }
     }
 
-    public Circle circle = new Circle(8);
+    public static Circle circle = new Circle(8);
 
     public BorderPane testScene() {
 
@@ -104,28 +98,24 @@ public class Simbolos implements Modulo {
             pulsaciones++;
             respuesta += listaSimbolos.get(0).getSimboloId();
             comprueba();
-            System.out.println("Respuesta: " + respuesta);
         });
         Button bt2 = new Button(listaSimbolos.get(1).getSimbolo());
         bt2.setOnAction(e -> {
             pulsaciones++;
             respuesta += listaSimbolos.get(1).getSimboloId();
             comprueba();
-            System.out.println("Respuesta: " + respuesta);
         });
         Button bt3 = new Button(listaSimbolos.get(2).getSimbolo());
         bt3.setOnAction(e -> {
             pulsaciones++;
             respuesta += listaSimbolos.get(2).getSimboloId();
             comprueba();
-            System.out.println("Respuesta: " + respuesta);
         });
         Button bt4 = new Button(listaSimbolos.get(3).getSimbolo());
         bt4.setOnAction(e -> {
             pulsaciones++;
             respuesta += listaSimbolos.get(3).getSimboloId();
             comprueba();
-            System.out.println("Respuesta: " + respuesta);
         });
 
         bt1.setMinSize(50, 50);
@@ -142,7 +132,7 @@ public class Simbolos implements Modulo {
         grid.add(bt3, 0, 1);
         grid.add(bt4, 1, 1);
 
-        circle.setFill(Color.GREEN);
+        circle.setFill(Color.BLACK);
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER_RIGHT);
         hb.setPadding(new Insets(0, 0, 5, 0));

@@ -9,9 +9,6 @@ import Helpers.Contexto;
 import Helpers.Utilities;
 import Interfaces.Modulo;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
@@ -23,7 +20,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
@@ -53,6 +49,14 @@ public class Simon implements Modulo {
     @Override
     public void setDesarmado(boolean var) {
         this.desarmado = var;
+        red.setOnMouseClicked(e -> {
+        });
+        blue.setOnMouseClicked(e -> {
+        });
+        green.setOnMouseClicked(e -> {
+        });
+        yellow.setOnMouseClicked(e -> {
+        });
     }
 
     public Simon(String sec) {
@@ -80,56 +84,61 @@ public class Simon implements Modulo {
     }
 
     public void displayColors(ArrayList<String> sequence) {
-        SequentialTransition s = new SequentialTransition();
-        s.setCycleCount(1);
-        s.setAutoReverse(false);
-        for (int i = 0; i < sequence.size(); i++) {
-            switch (sequence.get(i)) {
-                case "g":
-                    FadeTransition greenft = new FadeTransition(Duration.millis(300), green);
-                    greenft.setAutoReverse(true);
-                    greenft.setFromValue(1.0);
-                    greenft.setToValue(0.1);
-                    greenft.setCycleCount(2);
-                    s.getChildren().add(greenft);
-                    break;
-                case "r":
-                    FadeTransition redft = new FadeTransition(Duration.millis(300), red);
-                    redft.setAutoReverse(true);
-                    redft.setFromValue(1.0);
-                    redft.setToValue(0.1);
-                    redft.setCycleCount(2);
-                    s.getChildren().add(redft);
-                    break;
-                case "y":
-                    FadeTransition yellowft = new FadeTransition(Duration.millis(300), yellow);
-                    yellowft.setAutoReverse(true);
-                    yellowft.setFromValue(1.0);
-                    yellowft.setToValue(0.1);
-                    yellowft.setCycleCount(2);
-                    s.getChildren().add(yellowft);
+        if (Contexto.getFallos() == 3) {
+            endGame();
+            setDesarmado(true);
+            circle.setFill(Color.RED);
+        } else {
+            SequentialTransition s = new SequentialTransition();
+            s.setCycleCount(1);
+            s.setAutoReverse(false);
+            for (int i = 0; i < sequence.size(); i++) {
+                switch (sequence.get(i)) {
+                    case "g":
+                        FadeTransition greenft = new FadeTransition(Duration.millis(300), green);
+                        greenft.setAutoReverse(true);
+                        greenft.setFromValue(1.0);
+                        greenft.setToValue(0.1);
+                        greenft.setCycleCount(2);
+                        s.getChildren().add(greenft);
+                        break;
+                    case "r":
+                        FadeTransition redft = new FadeTransition(Duration.millis(300), red);
+                        redft.setAutoReverse(true);
+                        redft.setFromValue(1.0);
+                        redft.setToValue(0.1);
+                        redft.setCycleCount(2);
+                        s.getChildren().add(redft);
+                        break;
+                    case "y":
+                        FadeTransition yellowft = new FadeTransition(Duration.millis(300), yellow);
+                        yellowft.setAutoReverse(true);
+                        yellowft.setFromValue(1.0);
+                        yellowft.setToValue(0.1);
+                        yellowft.setCycleCount(2);
+                        s.getChildren().add(yellowft);
 
-                    break;
-                case "b":
-                    FadeTransition blueft = new FadeTransition(Duration.millis(300), blue);
-                    blueft.setAutoReverse(true);
-                    blueft.setFromValue(1.0);
-                    blueft.setToValue(0.1);
-                    blueft.setCycleCount(2);
-                    s.getChildren().add(blueft);
-                    break;
+                        break;
+                    case "b":
+                        FadeTransition blueft = new FadeTransition(Duration.millis(300), blue);
+                        blueft.setAutoReverse(true);
+                        blueft.setFromValue(1.0);
+                        blueft.setToValue(0.1);
+                        blueft.setCycleCount(2);
+                        s.getChildren().add(blueft);
+                        break;
+                }
             }
+            s.play();
         }
-        s.play();
     }
 
-    public boolean checkSequence(String color) {
+    public void checkSequence(String color) {
         if ((sequence.get(currentIndex)).equalsIgnoreCase(color)) {
             if (currentIndex == (sequence.size() - 1) && sequence.size() < sequenceLength) {
                 addToSequence();
                 currentIndex = 0;
                 displayColors(sequence);
-                return true;
             }
             if (sequence.size() == sequenceLength) {
                 setDesarmado(true);
@@ -137,17 +146,19 @@ public class Simon implements Modulo {
                 endGame();
             }
             currentIndex++;
-            return true;
         } else {
             endGame();
-            return false;
         }
+
     }
 
     public void endGame() {
         currentIndex = 0;
         sequence.clear();
         if (!desarmado) {
+            Contexto.setFallos();
+        }
+        if (!desarmado && Contexto.getFallos() < 3) {
             generateRandomSequence();
             displayColors(sequence);
         }
@@ -158,8 +169,8 @@ public class Simon implements Modulo {
     public Rectangle blue = new Rectangle(50, 50);
     public Rectangle green = new Rectangle(50, 50);
     public Rectangle yellow = new Rectangle(50, 50);
-    
-    public Circle circle = new Circle(8);
+
+    public static Circle circle = new Circle(8);
 
     public BorderPane testScene() {
         BorderPane border = new BorderPane();
@@ -173,7 +184,6 @@ public class Simon implements Modulo {
         grid.setHgap(10);
         grid.setVgap(10);
 
-
         red.setFill(Color.RED);
         blue.setFill(Color.BLUE);
         green.setFill(Color.GREEN);
@@ -184,23 +194,23 @@ public class Simon implements Modulo {
         yellow.setStroke(Color.BLACK);
 
         red.setOnMouseClicked(e -> {
-            if (!checkSequence("r")) {
-                Contexto.setFallos();
+            if(Contexto.getFallos() < 3){
+                checkSequence("r");
             }
         });
         blue.setOnMouseClicked(e -> {
-            if (!checkSequence("b")) {
-                Contexto.setFallos();
+            if(Contexto.getFallos() < 3){
+                checkSequence("b");
             }
         });
         green.setOnMouseClicked(e -> {
-            if (!checkSequence("g")) {
-                Contexto.setFallos();
+            if(Contexto.getFallos() < 3){
+                checkSequence("g");
             }
         });
         yellow.setOnMouseClicked(e -> {
-            if (!checkSequence("y")) {
-                Contexto.setFallos();
+            if(Contexto.getFallos() < 3){
+                checkSequence("y");
             }
         });
 

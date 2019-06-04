@@ -130,7 +130,7 @@ public class Main extends Application {
         border.setCenter(grid);
 
         Scene scene = new Scene(border, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(montaBomba(Utilities.dameBomba(1)));
         primaryStage.setTitle("DeBombMe");
         primaryStage.setResizable(false);
         scene.getStylesheets().add(Main.class.getResource("css/Stage1.css").toExternalForm());

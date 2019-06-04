@@ -5,6 +5,9 @@
  */
 package Helpers;
 
+import Modulos.Contador;
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author Pablo
@@ -27,7 +30,22 @@ public class Contexto {
     }
 
     public static void setFallos() {
-        fallos++;
+        switch (fallos) {
+            case 0:
+                fallos++;
+                Contador.strike1.setFill(Color.RED);
+                break;
+            case 1:
+                fallos++;
+                Contador.strike2.setFill(Color.RED);
+                break;
+            case 2:
+                fallos++;
+                Contador.strike3.setFill(Color.RED);
+                break;
+            default:
+                break;
+        }
     }
-    
+
 }

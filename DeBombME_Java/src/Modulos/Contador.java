@@ -2,8 +2,7 @@ package Modulos;
 
 import Helpers.Contexto;
 import Helpers.Utilities;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -92,7 +92,6 @@ public class Contador implements Runnable {
                 }
             }
             if (Contexto.fallos == 3) {
-
             }
         }
     }
@@ -102,9 +101,9 @@ public class Contador implements Runnable {
     private Label tiempo = new Label("00:00");
     public static int contadorSeconds = 0;
 
-    public Circle strike1 = new Circle(8);
-    public Circle strike2 = new Circle(8);
-    public Circle strike3 = new Circle(8);
+    public static Circle strike1 = new Circle(8);
+    public static Circle strike2 = new Circle(8);
+    public static Circle strike3 = new Circle(8);
 
     public static long getSegundos() {
         return contadorSeconds;
@@ -153,19 +152,22 @@ public class Contador implements Runnable {
 
             @Override
             public void handle(ActionEvent event) {
-
+                ClassLoader classLoader = getClass().getClassLoader();
+                File f = new File(classLoader.getResource("Helpers/Manual.txt").getFile());
+                String filename = f.getAbsolutePath();
                 TextArea area = new TextArea();
                 try {
-                    Scanner s = new Scanner(new File("/Helpers/Manual.txt")).useDelimiter("\\s+");
-                    while (s.hasNext()) {
-                        if (s.hasNextInt()) { // check if next token is an int
-                            area.appendText(s.nextInt() + " "); // display the found integer
-                        } else {
-                            area.appendText(s.next() + " "); // else read the next token
-                        }
+                    
+                    FileReader reader = new FileReader(filename);
+                    BufferedReader br = new BufferedReader(reader);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        area.appendText(line+"\n");
                     }
                 } catch (FileNotFoundException ex) {
                     System.err.println(ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 StackPane secondaryLayout = new StackPane();
