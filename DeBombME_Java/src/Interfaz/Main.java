@@ -5,13 +5,12 @@
  */
 package Interfaz;
 
+import Conexion.SessionFactoryUtil;
 import Helpers.Contexto;
 import Helpers.Utilities;
 import Modulos.*;
-import java.io.File;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,7 +22,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
@@ -34,36 +32,41 @@ import pojos.Bomba;
  * @author DAM 6J
  */
 public class Main extends Application {
-
+    
     public static void main(String[] args) {
         launch(args);
     }
-
-    private Stage primStage;
-
+    
+    public static Stage primStage;
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         primStage = primaryStage;
+        primStage.setOnHiding(event -> {
+            SessionFactoryUtil.destroy();
+            Contador.stop();
+            TemporizadorConBoton.stop();
+        });
         BorderPane border = new BorderPane();
         border.setId("grid");
-
+        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(15);
         grid.setVgap(10);
-
+        
         TextField user = new TextField();
         user.setPromptText("Usuario");
         GridPane.setHalignment(user, HPos.CENTER);
         grid.add(user, 0, 1);
         user.setId("usertxt");
-
+        
         PasswordField pass = new PasswordField();
         pass.setPromptText("Contraseña");
         GridPane.setHalignment(pass, HPos.CENTER);
         grid.add(pass, 0, 2);
         pass.setId("passtxt");
-
+        
         Button login = new Button("Login");
         login.setMaxWidth(Double.POSITIVE_INFINITY);
         login.setOnAction(e -> {
@@ -91,7 +94,7 @@ public class Main extends Application {
                     }
                 }
             }
-
+            
         });
         GridPane.setHalignment(login, HPos.CENTER);
         grid.add(login, 0, 3);
@@ -125,21 +128,22 @@ public class Main extends Application {
         hb.setAlignment(Pos.CENTER_RIGHT);
         hb.setPadding(new Insets(0, 20, 20, 0));
         hb.getChildren().add(registroTxt);
-
+        
         border.setBottom(hb);
         border.setCenter(grid);
-
+        
         Scene scene = new Scene(border, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
-        primaryStage.setScene(montaBomba(Utilities.dameBomba(1)));
+        //primaryStage.setScene(montaBomba(Utilities.dameBomba(1)));
+        primaryStage.setScene(scene);
         primaryStage.setTitle("DeBombMe");
         primaryStage.setResizable(false);
         scene.getStylesheets().add(Main.class.getResource("css/Stage1.css").toExternalForm());
         primaryStage.show();
     }
-
-    public Scene niveles() {
+    
+    public static Scene niveles() {
         BorderPane border = new BorderPane();
-
+        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 0, 75, 15));
@@ -147,7 +151,7 @@ public class Main extends Application {
         grid.setVgap(50);
         grid.setHgap(50);
         grid.setId("grid");
-
+        
         Button niv1 = new Button("Nivel 1");
         niv1.setId("btn");
         niv1.setOnAction(e -> {
@@ -190,7 +194,7 @@ public class Main extends Application {
         niv5.setId("btn");
         niv6.setId("btn");
         random.setId("btn");
-
+        
         grid.add(niv1, 0, 0);
         grid.add(niv2, 1, 0);
         grid.add(niv3, 2, 0);
@@ -198,22 +202,22 @@ public class Main extends Application {
         grid.add(niv5, 1, 1);
         grid.add(niv6, 2, 1);
         grid.add(random, 1, 2);
-
+        
         border.setCenter(grid);
         Scene sc = new Scene(border, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
         sc.getStylesheets().add(Main.class.getResource("css/Stage2.css").toExternalForm());
-
+        
         return sc;
     }
-
-    public Scene montaBomba(Bomba bomba) {
+    
+    private static Scene montaBomba(Bomba bomba) {
         Contador cont = new Contador(bomba.getModContador().getValor());
         Simon sim = new Simon(bomba.getModSimon().getSecuencia());
         Simbolos simbolos = new Simbolos(bomba.getModSimboloses());
         Password password = new Password(bomba.getModPassword().getTexto());
         CountdownButton countdown = new CountdownButton(bomba.getModBoton());
         TemporizadorConBoton tempo = new TemporizadorConBoton(bomba.getModTemporizador().getValor());
-
+        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.TOP_CENTER);
         grid.add(cont.testStage(), 0, 0);
@@ -222,12 +226,12 @@ public class Main extends Application {
         grid.add(password.testScene(), 0, 1);
         grid.add(simbolos.testScene(), 1, 1);
         grid.add(tempo.testScene(), 2, 1);
-
+        
         cont.start();
         tempo.start();
-
+        
         Scene scene = new Scene(grid, Utilities.PRIMERA_ANCHURA, Utilities.PRIMERA_ALTURA);
         return scene;
     }
-
+    
 }

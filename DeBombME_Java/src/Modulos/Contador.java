@@ -2,8 +2,8 @@ package Modulos;
 
 import Helpers.Contexto;
 import Helpers.Utilities;
+import Interfaz.Main;
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,11 +36,15 @@ import javax.swing.JFileChooser;
  */
 public class Contador implements Runnable {
 
-    private Thread hilo = null;
+    private static Thread hilo = null;
     private int segundosC; //en milesimas
 
     public Contador(int segundos) {
         segundosC = segundos;
+    }
+
+    public static void stop() {
+        hilo = null;
     }
 
     public void start() {
@@ -92,6 +96,35 @@ public class Contador implements Runnable {
                 }
             }
             if (Contexto.fallos == 3) {
+                TemporizadorConBoton.stop();
+                Simon.circle.setFill(Color.RED);
+                TemporizadorConBoton.circle.setFill(Color.RED);
+                CountdownButton.circle.setFill(Color.RED);
+                Password.circle.setFill(Color.RED);
+                Simbolos.circle.setFill(Color.RED);
+                try {
+                    JOptionPane.showMessageDialog(null, "¡Has perdido!");
+                    Thread.sleep(1250);
+                    Platform.runLater(() -> {
+                        Main.primStage.setScene(Main.niveles());
+                    });
+                    hilo = null;
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(Password.circle.getFill() == Color.GREEN && TemporizadorConBoton.circle.getFill() == Color.GREEN && Simbolos.circle.getFill() == Color.GREEN && Simon.circle.getFill() == Color.GREEN){
+                TemporizadorConBoton.stop();
+                try {
+                    JOptionPane.showMessageDialog(null, "¡Has ganado!");
+                    Thread.sleep(1250);
+                    Platform.runLater(() -> {
+                        Main.primStage.setScene(Main.niveles());
+                    });
+                    hilo = null;
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -157,12 +190,12 @@ public class Contador implements Runnable {
                 String filename = f.getAbsolutePath();
                 TextArea area = new TextArea();
                 try {
-                    
+
                     FileReader reader = new FileReader(filename);
                     BufferedReader br = new BufferedReader(reader);
                     String line;
                     while ((line = br.readLine()) != null) {
-                        area.appendText(line+"\n");
+                        area.appendText(line + "\n");
                     }
                 } catch (FileNotFoundException ex) {
                     System.err.println(ex);

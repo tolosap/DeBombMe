@@ -32,7 +32,7 @@ public class TemporizadorConBoton implements Runnable {
     private int tiempoTotal = 0;
     private Label lbl = new Label();
 
-    private Thread hilo = null;
+    public static Thread hilo = null;
 
     public TemporizadorConBoton(int value) {
         this.tiempo = value;
@@ -44,6 +44,10 @@ public class TemporizadorConBoton implements Runnable {
             hilo = new Thread(this); // creo el hilo
             hilo.start(); // lanzo hilo
         }
+    }
+    
+    public static void stop(){
+        hilo = null;
     }
 
     @Override
@@ -99,7 +103,7 @@ public class TemporizadorConBoton implements Runnable {
         }
     }
 
-    public Circle circle = new Circle(8);
+    public static Circle circle = new Circle(8);
 
     public BorderPane testScene() {
         BorderPane border = new BorderPane();
@@ -124,7 +128,7 @@ public class TemporizadorConBoton implements Runnable {
         grid.add(lbl, 0, 0);
         grid.add(btn, 0, 1);
 
-        circle.setFill(Color.GREEN);
+        circle.setFill(Color.BLACK);
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER_RIGHT);
         hb.setPadding(new Insets(0, 0, 5, 0));

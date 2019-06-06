@@ -5,6 +5,7 @@
  */
 package Modulos;
 
+import Helpers.Contexto;
 import Helpers.Utilities;
 import Interfaces.Modulo;
 import java.util.ArrayList;
@@ -24,21 +25,21 @@ import javafx.scene.shape.Circle;
  *
  * @author Pablo
  */
-public class Password implements Modulo, Runnable {
-
-    private Thread hilo = null;
+public class Password implements Modulo {
 
     private boolean desarmado = false;
     private String solucion = "";
 
-    private static String cadena1 = "abcdefghijklmnopqrstuvwxyz";
-    private static String cadena2 = "abcdefghijklmnopqrstuvwxyz";
-    private static String cadena3 = "abcdefghijklmnopqrstuvwxyz";
-    private static String cadena4 = "abcdefghijklmnopqrstuvwxyz";
-    private static String cadena5 = "abcdefghijklmnopqrstuvwxyz";
+    private static String cadena = "abcdefghijlmnopqrstuv";
 
     public Password(String palabra) {
         this.solucion = palabra;
+        cadena = cadena.toUpperCase();
+        btn1.setText(String.valueOf(cadena.charAt(0)));
+        btn2.setText(String.valueOf(cadena.charAt(0)));
+        btn3.setText(String.valueOf(cadena.charAt(0)));
+        btn4.setText(String.valueOf(cadena.charAt(0)));
+        btn5.setText(String.valueOf(cadena.charAt(0)));
     }
 
     public Password() {
@@ -55,44 +56,56 @@ public class Password implements Modulo, Runnable {
         this.desarmado = var;
     }
 
-    public void start() {
-        if (hilo == null) {
-            hilo = new Thread(this); // creo el hilo
-            hilo.start(); // lanzo hilo
-        }
-    }
+    public void compruebaPassword() {
+        if (desarmado) {
 
-    @Override
-    public void run() {
-        Thread hiloActual = Thread.currentThread();
-        List<String> lista = new ArrayList<String>();
-        lista.add(cadena1);
-        lista.add(cadena2);
-        lista.add(cadena3);
-        lista.add(cadena4);
-        lista.add(cadena5);
-        char[] passchar = solucion.toCharArray();
-        int listaIter = 0;
-        for (char c : passchar) {
-            lista.get(listaIter).replace("a", "");
-            System.out.println(lista);
-            listaIter++;
+        } else {
+            String solucionUser = btn1.getText() + "" + btn2.getText() + ""
+                    + btn3.getText() + "" + btn4.getText() + "" + btn5.getText();
+            if (solucion.equalsIgnoreCase(solucionUser)) {
+                System.out.println("Perfecto.");
+                setDesarmado(true);
+                circle.setFill(Color.GREEN);
+            } else {
+                System.out.println("Error");
+                Contexto.setFallos();
+            }
         }
-        while (hiloActual == hilo) {
 
-        }
     }
 
     ///////////////panel
-    private Button lb1 = new Button("A");
-    private Button lb2 = new Button("R");
-    private Button lb3 = new Button("P");
-    private Button lb4 = new Button("J");
-    private Button lb5 = new Button("P");
+    private Button btn1 = new Button();
+    private Button btn2 = new Button();
+    private Button btn3 = new Button();
+    private Button btn4 = new Button();
+    private Button btn5 = new Button();
 
-    public Circle circle = new Circle(8);
+    private int index1 = 0;
+    private int index2 = 0;
+    private int index3 = 0;
+    private int index4 = 0;
+    private int index5 = 0;
+
+    public static Circle circle = new Circle(8);
 
     public BorderPane testScene() {
+
+        btn1.setOnAction(e -> {
+            compruebaPassword();
+        });
+        btn2.setOnAction(e -> {
+            compruebaPassword();
+        });
+        btn3.setOnAction(e -> {
+            compruebaPassword();
+        });
+        btn4.setOnAction(e -> {
+            compruebaPassword();
+        });
+        btn5.setOnAction(e -> {
+            compruebaPassword();
+        });
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(10, 25, 25, 25));
@@ -114,33 +127,105 @@ public class Password implements Modulo, Runnable {
             e.printStackTrace();
         }
         ImageView arrowUp1 = new ImageView(imgUp);
+        arrowUp1.setOnMouseClicked(e -> {
+            if (index1 < 20) {
+                index1++;
+            } else {
+                index1 = 0;
+            }
+            btn1.setText(String.valueOf(cadena.charAt(index1)));
+        });
         ImageView arrowUp2 = new ImageView(imgUp);
+        arrowUp2.setOnMouseClicked(e -> {
+            if (index2 < 20) {
+                index2++;
+                btn2.setText(String.valueOf(cadena.charAt(index2)));
+            }
+        });
         ImageView arrowUp3 = new ImageView(imgUp);
+        arrowUp3.setOnMouseClicked(e -> {
+            if (index3 < 20) {
+                index3++;
+                btn3.setText(String.valueOf(cadena.charAt(index3)));
+            }
+        });
         ImageView arrowUp4 = new ImageView(imgUp);
+        arrowUp4.setOnMouseClicked(e -> {
+            if (index4 < 20) {
+                index4++;
+                btn4.setText(String.valueOf(cadena.charAt(index4)));
+            }
+        });
         ImageView arrowUp5 = new ImageView(imgUp);
+        arrowUp5.setOnMouseClicked(e -> {
+            if (index5 < 20) {
+                index5++;
+                btn5.setText(String.valueOf(cadena.charAt(index5)));
+            }
+        });
 
         ImageView arrowDown1 = new ImageView(imgDown);
         ImageView arrowDown2 = new ImageView(imgDown);
         ImageView arrowDown3 = new ImageView(imgDown);
         ImageView arrowDown4 = new ImageView(imgDown);
         ImageView arrowDown5 = new ImageView(imgDown);
+        arrowDown1.setOnMouseClicked(e -> {
+            if (index1 > 0) {
+                index1--;
+            } else {
+                index1 = 20;
+            }
+            btn1.setText(String.valueOf(cadena.charAt(index1)));
+        });
+        arrowDown2.setOnMouseClicked(e -> {
+            if (index2 > 0) {
+                index2--;
+            } else {
+                index2 = 20;
+            }
+            btn2.setText(String.valueOf(cadena.charAt(index2)));
+        });
+        arrowDown3.setOnMouseClicked(e -> {
+            if (index3 > 0) {
+                index3--;
+            } else {
+                index3 = 20;
+            }
+            btn3.setText(String.valueOf(cadena.charAt(index3)));
+        });
+        arrowDown4.setOnMouseClicked(e -> {
+            if (index4 > 0) {
+                index4--;
+            } else {
+                index4 = 20;
+            }
+            btn4.setText(String.valueOf(cadena.charAt(index4)));
+        });
+        arrowDown5.setOnMouseClicked(e -> {
+            if (index5 > 0) {
+                index5--;
+            } else {
+                index5 = 20;
+            }
+            btn5.setText(String.valueOf(cadena.charAt(index5)));
+        });
 
-        lb1.setMaxSize(25, 20);
-        lb2.setMaxSize(25, 20);
-        lb3.setMaxSize(25, 20);
-        lb4.setMaxSize(25, 20);
-        lb5.setMaxSize(25, 20);
+        btn1.setMinSize(27, 20);
+        btn2.setMinSize(27, 20);
+        btn3.setMinSize(27, 20);
+        btn4.setMinSize(27, 20);
+        btn5.setMinSize(27, 20);
 
         pane.add(arrowUp1, 0, 0);
         pane.add(arrowUp2, 1, 0);
         pane.add(arrowUp3, 2, 0);
         pane.add(arrowUp4, 3, 0);
         pane.add(arrowUp5, 4, 0);
-        pane.add(lb1, 0, 1);
-        pane.add(lb2, 1, 1);
-        pane.add(lb3, 2, 1);
-        pane.add(lb4, 3, 1);
-        pane.add(lb5, 4, 1);
+        pane.add(btn1, 0, 1);
+        pane.add(btn2, 1, 1);
+        pane.add(btn3, 2, 1);
+        pane.add(btn4, 3, 1);
+        pane.add(btn5, 4, 1);
         pane.add(arrowDown1, 0, 2);
         pane.add(arrowDown2, 1, 2);
         pane.add(arrowDown3, 2, 2);
