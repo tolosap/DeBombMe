@@ -30,17 +30,18 @@ public class Contexto {
     }
 
     public static void setFallos() {
+        fallos++;
+    }
+    
+    public static void pintaFallos(){
         switch (fallos) {
             case 0:
-                fallos++;
                 Contador.strike1.setFill(Color.RED);
                 break;
             case 1:
-                fallos++;
                 Contador.strike2.setFill(Color.RED);
                 break;
             case 2:
-                fallos++;
                 Contador.strike3.setFill(Color.RED);
                 break;
             default:

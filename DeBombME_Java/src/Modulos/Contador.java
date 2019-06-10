@@ -59,7 +59,7 @@ public class Contador implements Runnable {
     public void run() {
         Thread hiloActual = Thread.currentThread();
         while (hiloActual == hilo) {
-            if (Contexto.fallos == 0) {
+            if (Contexto.fallos == 0 && segundosC > 0) {
                 Platform.runLater(() -> {
                     valueSec = segundosC;
                     llenaContador();
@@ -71,31 +71,31 @@ public class Contador implements Runnable {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (Contexto.fallos == 1) {
+            if (Contexto.fallos == 1 && segundosC > 0) {
                 Platform.runLater(() -> {
                     llenaContador();
                     valueSec = segundosC;
                     segundosC--;
                 });
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(550);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (Contexto.fallos == 2) {
+            if (Contexto.fallos == 2 && segundosC > 0) {
                 Platform.runLater(() -> {
                     llenaContador();
                     valueSec = segundosC;
                     segundosC--;
                 });
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(450);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if (Contexto.fallos == 3) {
+            if (Contexto.fallos == 3 || segundosC == 0) {
                 TemporizadorConBoton.stop();
                 Simon.circle.setFill(Color.RED);
                 TemporizadorConBoton.circle.setFill(Color.RED);
@@ -113,7 +113,7 @@ public class Contador implements Runnable {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(Password.circle.getFill() == Color.GREEN && TemporizadorConBoton.circle.getFill() == Color.GREEN && Simbolos.circle.getFill() == Color.GREEN && Simon.circle.getFill() == Color.GREEN){
+            if (Password.circle.getFill() == Color.GREEN && CountdownButton.circle.getFill() == Color.GREEN && Simbolos.circle.getFill() == Color.GREEN && Simon.circle.getFill() == Color.GREEN) {
                 TemporizadorConBoton.stop();
                 try {
                     JOptionPane.showMessageDialog(null, "¡Has ganado!");
@@ -186,11 +186,10 @@ public class Contador implements Runnable {
             @Override
             public void handle(ActionEvent event) {
                 ClassLoader classLoader = getClass().getClassLoader();
-                File f = new File(classLoader.getResource("Helpers/Manual.txt").getFile());
+                File f = new File(classLoader.getResource("Helpers/Manual2.txt").getFile());
                 String filename = f.getAbsolutePath();
                 TextArea area = new TextArea();
                 try {
-
                     FileReader reader = new FileReader(filename);
                     BufferedReader br = new BufferedReader(reader);
                     String line;
@@ -202,18 +201,17 @@ public class Contador implements Runnable {
                 } catch (IOException ex) {
                     Logger.getLogger(Contador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 StackPane secondaryLayout = new StackPane();
                 secondaryLayout.getChildren().add(area);
 
-                Scene secondScene = new Scene(secondaryLayout, 300, 400);
+                Scene secondScene = new Scene(secondaryLayout, 400, 400);
 
-                // New window (Stage)
                 Stage newWindow = new Stage();
                 newWindow.setTitle("Instrucciones");
                 newWindow.setScene(secondScene);
 
                 newWindow.show();
+                area.setScrollTop(0);
             }
         });
         hb2.setAlignment(Pos.CENTER);

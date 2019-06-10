@@ -7,7 +7,6 @@ package Modulos;
 
 import Helpers.Contexto;
 import Helpers.Utilities;
-import static Modulos.Contador.contadorSeconds;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -62,6 +61,7 @@ public class TemporizadorConBoton implements Runnable {
                     } else {
                         llenaContador();
                         Contexto.setFallos();
+                        Contexto.pintaFallos();
                         tiempo = tiempoTotal;
                     }
                 });
@@ -79,6 +79,7 @@ public class TemporizadorConBoton implements Runnable {
                     } else {
                         llenaContador();
                         Contexto.setFallos();
+                        Contexto.pintaFallos();
                         tiempo = tiempoTotal;
                     }
                 });

@@ -8,8 +8,6 @@ package Modulos;
 import Helpers.Contexto;
 import Helpers.Utilities;
 import Interfaces.Modulo;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -69,6 +67,7 @@ public class Password implements Modulo {
             } else {
                 System.out.println("Error");
                 Contexto.setFallos();
+                Contexto.pintaFallos();
             }
         }
 

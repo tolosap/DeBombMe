@@ -45,9 +45,6 @@ public class Utilities {
             if (q.uniqueResult() == null) {
                 sesion.save(us);
                 tx.commit();
-                System.out.println("Usuario creado correctamente");
-                System.out.println("Pass sin sha: " + password);
-                System.out.println("Pass con sha: " + Sha256.getSHA(password));
                 registrado = true;
             } else {
                 JOptionPane.showMessageDialog(null, "Error, el nombre de usuario ya existe");
@@ -76,10 +73,9 @@ public class Utilities {
             q.setParameter("password", Sha256.getSHA(password));
 
             if (q.uniqueResult() == null) {
-                System.out.println("Error en el login");
+                JOptionPane.showMessageDialog(null, "¡Error en el login!");
             } else {
-                JOptionPane.showMessageDialog(null, "Bienvenido al sistema!");
-                System.out.println("Bienvenido al sistema!");
+                JOptionPane.showMessageDialog(null, "¡Bienvenido al sistema!");
                 entra = true;
             }
         } catch (Exception e) {

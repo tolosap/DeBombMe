@@ -31,7 +31,6 @@ public class Simbolos implements Modulo {
     private boolean desarmado = false;
     private List<ModSimbolos> listaSimbolos;
 
-    //
     private int pulsaciones = 0;
     private String respuestaString = "";
 
@@ -71,6 +70,7 @@ public class Simbolos implements Modulo {
                 circle.setFill(Color.GREEN);
             } else {
                 Contexto.setFallos();
+                Contexto.pintaFallos();
                 respuesta = "";
                 pulsaciones = 0;
             }

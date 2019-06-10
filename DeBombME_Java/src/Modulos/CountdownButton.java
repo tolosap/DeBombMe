@@ -25,8 +25,6 @@ import pojos.ModBoton;
  */
 public class CountdownButton implements Modulo {
 
-    //hilo
-    private Thread hilo = null;
     //modulo var
     private boolean desarmado = false;
     //data
@@ -87,7 +85,7 @@ public class CountdownButton implements Modulo {
                 + "-fx-font-size: 15px;"
         );
         boton.setOnAction(e -> {
-            if (Contexto.getFallos() < 3) {
+            if (Contexto.getFallos() < 3 && !getDesarmado()) {
                 long valor = Contador.getSegundos();
                 if (String.valueOf(valor).length() == 1) {
                     if (valor == soluci) {
@@ -95,6 +93,7 @@ public class CountdownButton implements Modulo {
                         circle.setFill(Color.GREEN);
                     } else {
                         Contexto.setFallos();
+                        Contexto.pintaFallos();
                     }
                 } else {
                     long aux = Long.valueOf(String.valueOf(valor).substring(1));
@@ -103,6 +102,7 @@ public class CountdownButton implements Modulo {
                         circle.setFill(Color.GREEN);
                     } else {
                         Contexto.setFallos();
+                        Contexto.pintaFallos();
                     }
                 }
             }

@@ -34,6 +34,7 @@ public class Simon implements Modulo {
     private boolean desarmado = false;
     private boolean stop = false;
     private boolean win = false;
+    private boolean continua = false;
     /////////
     private int currentIndex;
     private final int STARTTURNS = 3;
@@ -63,6 +64,7 @@ public class Simon implements Modulo {
         Platform.runLater(() -> {
             sequenceLength = sec.length();
             currentIndex = 0;
+            continua = true;
             sequence = new ArrayList<String>();
             generateRandomSequence();
             displayColors(sequence);
@@ -138,14 +140,21 @@ public class Simon implements Modulo {
             if (currentIndex == (sequence.size() - 1) && sequence.size() < sequenceLength) {
                 addToSequence();
                 currentIndex = 0;
-                displayColors(sequence);
+                if (sequence.size() < sequenceLength) {
+                    displayColors(sequence);
+                }
+                continua = false;
+            } else {
+                continua = true;
             }
             if (sequence.size() == sequenceLength) {
                 setDesarmado(true);
                 circle.setFill(Color.GREEN);
                 endGame();
             }
-            currentIndex++;
+            if (continua) {
+                currentIndex++;
+            }
         } else {
             endGame();
         }
@@ -157,6 +166,7 @@ public class Simon implements Modulo {
         sequence.clear();
         if (!desarmado) {
             Contexto.setFallos();
+            Contexto.pintaFallos();
         }
         if (!desarmado && Contexto.getFallos() < 3) {
             generateRandomSequence();
@@ -194,22 +204,22 @@ public class Simon implements Modulo {
         yellow.setStroke(Color.BLACK);
 
         red.setOnMouseClicked(e -> {
-            if(Contexto.getFallos() < 3){
+            if (Contexto.getFallos() < 3) {
                 checkSequence("r");
             }
         });
         blue.setOnMouseClicked(e -> {
-            if(Contexto.getFallos() < 3){
+            if (Contexto.getFallos() < 3) {
                 checkSequence("b");
             }
         });
         green.setOnMouseClicked(e -> {
-            if(Contexto.getFallos() < 3){
+            if (Contexto.getFallos() < 3) {
                 checkSequence("g");
             }
         });
         yellow.setOnMouseClicked(e -> {
-            if(Contexto.getFallos() < 3){
+            if (Contexto.getFallos() < 3) {
                 checkSequence("y");
             }
         });

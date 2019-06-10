@@ -1,0 +1,235 @@
+﻿////////////////////////////////////////
+//////##################///////
+//////#####DEBOMBME####///////
+//////##################///////
+/////////////////////////////////////////
+
+---------INSTRUCCIONES-----------
+
+
+_________MÓDULO CONTADOR+_________
+
+///////////////////////////////////////
+////			x	0	0	 /////
+////						 /////
+////						 /////
+////		       03:37		 	 /////
+////						 /////
+////	      INSTRUCCIONES	 /////
+////						 /////
+///////////////////////////////////////
+
+Este módulo no podrá ser desactivado a no ser que
+se consiga desactivar todos los demás módulos.
+
+Los tres circulos superiores se encenderán en caso
+de que falles al intentar resolver uno de ellos. Tienes
+tres intentos para no perder, buena suerte.
+
+En caso de fallar, el contador irá descendiendo más
+rápidamente.
+
+
+
+_______MÓDULO CUENTA ATRÁS________
+
+//////////////////////////////////
+////				0	 /////
+////					 /////
+////		  04:37		 /////
+////					 /////
+////		  RESET		 /////
+////					 /////
+//////////////////////////////////
+
+Quizá uno de los módulos más simples pero más importantes.
+¡No debes dejar que el contador llegue a 0!
+De lo contrario, obtendrás un strike.
+
+
+
+_________MÓDULO SÍMBOLOS_________
+
+///////////////////////////////////////
+////					0	 /////
+////				 		 /////
+////		/////		/////		 /////
+////		//*//		//?//		 /////
+////		/////		/////	 	/////
+////						 /////
+////		/////		/////		 /////
+////		//_//		//!//	 	/////
+////		/////		/////		 /////
+////				 		 /////
+////						 /////
+///////////////////////////////////////
+
+
+Debes pulsar en orden de menor a mayor
+los símbolos que aparecen, según su valor asignado.
+
+
+	@----1------!----9
+	
+	+----4------*----5
+	
+	?----10-----%----7
+	
+	&----8------_----3
+	
+	#----2------/----6
+	
+	
+
+________MÓDULO CONTRA+SEÑA_________
+
+///////////////////////////////////////
+////					0	 /////
+////				 		 /////
+////	/\	/\	/\	/\	/\	 /////
+////	|A|	|B| |	C|	|D| 	|E|	 /////
+////	\/	\/	\/	\/	\/	 /////
+////				 		 /////
+////						 /////
+////////////////////////////////////////
+
+
+Probablemente el módulo más complicado de todos.
+¡Déjalo para el final y utiliza un papel si lo necesitas!
+Si no encuentras la solución a una letra, pasa a la siguiente,
+¡puede que te de una pista!
+
+Para poder cambiar las letras, has de pulsar en las
+flechas de dirección arriba o abajo.
+
+Cómo resolverlo:
+
+****1 LETRA****
+
+-Si la franja que aparece es de color rojo:
+		B
+-Si la franja que aparece es de color negro:
+		C
+-Si es de otro color:
+		S
+-Si la franja que aparece es de color verde:
+		A
+		
+****2 LETRA****
+
+-Si la franja es de color azul
+		I
+-Si la primera letra es una vocal
+		M ó D ó T
+-Si la primera letra es una C
+		L
+-Ninguna de las combinaciones anteriores
+		O
+		
+****3 LETRA****
+
+-Si la primera letra es una vocal
+		I
+-Si la franja es de color negro
+		A
+-La primera letra es una S
+		La solución a la contraseña es
+		el nombre de un módulo
+-Ninguna de las otras combinaciones
+		M o T
+		
+****4 LETRA****
+
+-Si la franja es de color verde y aparece un *
+en el módulo de simbolos
+		G y 5a letra O
+-Si dudas de la 2da letra
+		O
+-Si la primera letra no es una B o vocal
+		Las letras que te quedan están
+		marcadas con + a lo largo de las
+		instrucciones.
+-Si tienes dudas y hay un simbolo /
+		O
+
+****5 LETRA****
+
+-Si hay un símbolo X
+		Solucion: DADOS
+-Si te falta la 3a letra y la 4a
+        La solución es lo que hay que desactivar
+        para ganar.
+-Cualquier otro caso
+        N o S
+
+Una vez que creas saber la respuesta, no hace falta más que
+pulsar cualquiera de los botones que contienen las letras.
+
+
+________MÓDULO SIMON DICE________
+
+///////////////////////////////////////
+////					0	 /////
+////				 		 /////
+////		/////		/////		 /////
+////		/////		/////		 /////
+////		/////		/////	 	 /////
+////						 /////
+////		/////		/////		 /////
+////		/////		/////		 /////
+////		/////		/////		 /////
+////				 		 /////
+////						 /////
+///////////////////////////////////////
+
+Has de ser rápido para desactivar este módulo.
+Empezará cuando menos te lo esperes, así que no lo
+dejes para el final.
+
+¡Has de repetir la secuencia que se muestre!
+
+
+_______MÓDULO BOTON FRANJA A COLOR_______
+
+
+///////////////////////////////////////
+////					0	 /////
+////				 		 /////
+////			 	/////	 	 /////
+////	     //////		/////  	 /////
+//// 	//RATON//	///// 	 /////
+////	    //////		/////	 	 /////
+////				///// 	 /////
+////				/////	 	 /////
+////				///// 	 /////
+////				 		 /////
+////////////////////////////////////////
+
+Para resolver este minijuego tienes que sumar una serie
+de números. Una vez tengas ese número has de pulsar
+el botón justo cuando el número secreto aparezca en los segundos
+del contador principal.
+
+Ejemplo: Número secreto 7
+		 ----->0X:X7<----
+		 
+Para obtener el número: 
+	
+-Dividir la longitud del texto del boton / 2
+	
+-Si el color que aparece es:
+		VERDE		AZUL		OTRO
+		Sumar 1		Sumar 2		Sumar 3
+		
+-El último valor lo encontrarás en las instrucciones:
+	*Si el color es OTRO y el boton empieza por consonante
+	SUMAR EL PRIMER NUMERO QUE APAREZCA EN LAS INSTRUCCIONES
+	
+	*Si el color no es Azul y el boton empieza por vocal
+	SUMAR UN 1
+	
+	*Cualquier otro caso
+	SUMAR EL VALOR DEL SIMBOLO #
+
+
+
