@@ -35,13 +35,13 @@ public class Contexto {
     
     public static void pintaFallos(){
         switch (fallos) {
-            case 0:
+            case 1:
                 Contador.strike1.setFill(Color.RED);
                 break;
-            case 1:
+            case 2:
                 Contador.strike2.setFill(Color.RED);
                 break;
-            case 2:
+            case 3:
                 Contador.strike3.setFill(Color.RED);
                 break;
             default:

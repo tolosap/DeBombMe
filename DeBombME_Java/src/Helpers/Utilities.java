@@ -48,7 +48,6 @@ public class Utilities {
                 registrado = true;
             } else {
                 JOptionPane.showMessageDialog(null, "Error, el nombre de usuario ya existe");
-                System.out.println("Error, el nombre de usuario ya existe");
             }
         } catch (Exception ex) {
             ex.printStackTrace();

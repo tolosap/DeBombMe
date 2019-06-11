@@ -28,19 +28,14 @@ import javafx.util.Duration;
  */
 public class Simon implements Modulo {
 
-    //hilo
-    private Thread hilo = null;
-    //
     private boolean desarmado = false;
-    private boolean stop = false;
-    private boolean win = false;
     private boolean continua = false;
     /////////
-    private int currentIndex;
-    private final int STARTTURNS = 3;
-    private int sequenceLength = 0;
-    private ArrayList<String> sequence;
-    private final String[] COLORS = {"g", "r", "y", "b"};
+    private int indexActual;
+    private final int EMPIEZA = 3;
+    private int longSecuencia = 0;
+    private ArrayList<String> sencuencia;
+    private final String[] COLORES = {"g", "r", "y", "b"};
 
     @Override
     public boolean getDesarmado() {
@@ -62,30 +57,30 @@ public class Simon implements Modulo {
 
     public Simon(String sec) {
         Platform.runLater(() -> {
-            sequenceLength = sec.length();
-            currentIndex = 0;
+            longSecuencia = sec.length();
+            indexActual = 0;
             continua = true;
-            sequence = new ArrayList<String>();
+            sencuencia = new ArrayList<String>();
             generateRandomSequence();
-            displayColors(sequence);
+            iniciaTransic(sencuencia);
         });
     }
 
     private void generateRandomSequence() {
-        for (int i = 0; i < STARTTURNS; i++) {
-            sequence.add(randomColor());
+        for (int i = 0; i < EMPIEZA; i++) {
+            sencuencia.add(randomColor());
         }
     }
 
-    public void addToSequence() {
-        sequence.add(randomColor());
+    public void anyadeSec() {
+        sencuencia.add(randomColor());
     }
 
     private String randomColor() {
-        return COLORS[(int) (Math.random() * 4)];
+        return COLORES[(int) (Math.random() * 4)];
     }
 
-    public void displayColors(ArrayList<String> sequence) {
+    public void iniciaTransic(ArrayList<String> sencuencia) {
         if (Contexto.getFallos() == 3) {
             endGame();
             setDesarmado(true);
@@ -94,8 +89,8 @@ public class Simon implements Modulo {
             SequentialTransition s = new SequentialTransition();
             s.setCycleCount(1);
             s.setAutoReverse(false);
-            for (int i = 0; i < sequence.size(); i++) {
-                switch (sequence.get(i)) {
+            for (int i = 0; i < sencuencia.size(); i++) {
+                switch (sencuencia.get(i)) {
                     case "g":
                         FadeTransition greenft = new FadeTransition(Duration.millis(300), green);
                         greenft.setAutoReverse(true);
@@ -136,24 +131,24 @@ public class Simon implements Modulo {
     }
 
     public void checkSequence(String color) {
-        if ((sequence.get(currentIndex)).equalsIgnoreCase(color)) {
-            if (currentIndex == (sequence.size() - 1) && sequence.size() < sequenceLength) {
-                addToSequence();
-                currentIndex = 0;
-                if (sequence.size() < sequenceLength) {
-                    displayColors(sequence);
+        if ((sencuencia.get(indexActual)).equalsIgnoreCase(color)) {
+            if (indexActual == (sencuencia.size() - 1) && sencuencia.size() < longSecuencia) {
+                anyadeSec();
+                indexActual = 0;
+                if (sencuencia.size() < longSecuencia) {
+                    iniciaTransic(sencuencia);
                 }
                 continua = false;
             } else {
                 continua = true;
             }
-            if (sequence.size() == sequenceLength) {
+            if (sencuencia.size() == longSecuencia) {
                 setDesarmado(true);
                 circle.setFill(Color.GREEN);
                 endGame();
             }
             if (continua) {
-                currentIndex++;
+                indexActual++;
             }
         } else {
             endGame();
@@ -162,15 +157,15 @@ public class Simon implements Modulo {
     }
 
     public void endGame() {
-        currentIndex = 0;
-        sequence.clear();
+        indexActual = 0;
+        sencuencia.clear();
         if (!desarmado) {
             Contexto.setFallos();
             Contexto.pintaFallos();
         }
         if (!desarmado && Contexto.getFallos() < 3) {
             generateRandomSequence();
-            displayColors(sequence);
+            iniciaTransic(sencuencia);
         }
     }
 
