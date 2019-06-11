@@ -10,10 +10,10 @@
 _________MÓDULO CONTADOR+_________
 
 ///////////////////////////////////////
-////			x	0	0	 /////
+////			x	O	O	 /////
 ////						 /////
 ////						 /////
-////		       03:37		 	 /////
+////		       10:37		 	 /////
 ////						 /////
 ////	      INSTRUCCIONES	 /////
 ////						 /////
@@ -34,7 +34,7 @@ rápidamente.
 _______MÓDULO CUENTA ATRÁS________
 
 //////////////////////////////////
-////				0	 /////
+////				O	 /////
 ////					 /////
 ////		  04:37		 /////
 ////					 /////
@@ -51,7 +51,7 @@ De lo contrario, obtendrás un strike.
 _________MÓDULO SÍMBOLOS_________
 
 ///////////////////////////////////////
-////					0	 /////
+////					O	 /////
 ////				 		 /////
 ////		/////		/////		 /////
 ////		//*//		//?//		 /////
@@ -84,7 +84,7 @@ los símbolos que aparecen, según su valor asignado.
 ________MÓDULO CONTRA+SEÑA_________
 
 ///////////////////////////////////////
-////					0	 /////
+////					O	 /////
 ////				 		 /////
 ////	/\	/\	/\	/\	/\	 /////
 ////	|A|	|B| |	C|	|D| 	|E|	 /////
@@ -96,8 +96,9 @@ ________MÓDULO CONTRA+SEÑA_________
 
 Probablemente el módulo más complicado de todos.
 ¡Déjalo para el final y utiliza un papel si lo necesitas!
-Si no encuentras la solución a una letra, pasa a la siguiente,
-¡puede que te de una pista!
+Quizá debas mirar 
+(Si no encuentras la solución a una letra, pasa a la siguiente,
+¡puede que te de una pista!)
 
 Para poder cambiar las letras, has de pulsar en las
 flechas de dirección arriba o abajo.
@@ -109,7 +110,7 @@ Cómo resolverlo:
 -Si la franja que aparece es de color rojo:
 		B
 -Si la franja que aparece es de color negro:
-		C
+		El primer módulo empieza así
 -Si es de otro color:
 		S
 -Si la franja que aparece es de color verde:
@@ -128,13 +129,13 @@ Cómo resolverlo:
 		
 ****3 LETRA****
 
--Si la primera letra es una vocal
-		I
 -Si la franja es de color negro
 		A
 -La primera letra es una S
 		La solución a la contraseña es
 		el nombre de un módulo
+-Si la primera letra es una vocal
+		I
 -Ninguna de las otras combinaciones
 		M o T
 		
@@ -169,7 +170,7 @@ pulsar cualquiera de los botones que contienen las letras.
 ________MÓDULO SIMON DICE________
 
 ///////////////////////////////////////
-////					0	 /////
+////					O	 /////
 ////				 		 /////
 ////		/////		/////		 /////
 ////		/////		/////		 /////
@@ -193,7 +194,7 @@ _______MÓDULO BOTON FRANJA A COLOR_______
 
 
 ///////////////////////////////////////
-////					0	 /////
+////					O	 /////
 ////				 		 /////
 ////			 	/////	 	 /////
 ////	     //////		/////  	 /////
@@ -216,6 +217,7 @@ Ejemplo: Número secreto 7
 Para obtener el número: 
 	
 -Dividir la longitud del texto del boton / 2
+redondear hacia abajo.
 	
 -Si el color que aparece es:
 		VERDE		AZUL		OTRO
